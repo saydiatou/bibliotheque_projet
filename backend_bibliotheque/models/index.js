@@ -8,16 +8,16 @@ const Borrow   = require('./Borrow');
 
 // --- Associations ---
 
-// Une catégorie a plusieurs livres
-Category.hasMany(Book, { foreignKey: 'category_id' });
-Book.belongsTo(Category, { foreignKey: 'category_id' });
+// Une catégorie a plusieurs livres (avec alias 'books')
+Category.hasMany(Book, { foreignKey: 'category_id', as: 'books' });
+Book.belongsTo(Category, { foreignKey: 'category_id', as: 'category' });
 
-// Un membre a plusieurs emprunts
-Member.hasMany(Borrow, { foreignKey: 'member_id' });
-Borrow.belongsTo(Member, { foreignKey: 'member_id' });
+// Un membre a plusieurs emprunts (avec alias 'borrows')
+Member.hasMany(Borrow, { foreignKey: 'member_id', as: 'borrows' });
+Borrow.belongsTo(Member, { foreignKey: 'member_id', as: 'member' });
 
 // Un livre a plusieurs emprunts
-Book.hasMany(Borrow, { foreignKey: 'book_id' });
-Borrow.belongsTo(Book, { foreignKey: 'book_id' });
+Book.hasMany(Borrow, { foreignKey: 'book_id', as: 'borrows' });
+Borrow.belongsTo(Book, { foreignKey: 'book_id', as: 'book' });
 
 module.exports = { sequelize, User, Category, Book, Member, Borrow };
