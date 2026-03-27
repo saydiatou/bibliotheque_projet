@@ -1,41 +1,36 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Member = sequelize.define('Member', {
+const Borrow = sequelize.define('Borrow', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  first_name: {
-    type: DataTypes.STRING,
+  member_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
-  last_name: {
-    type: DataTypes.STRING,
+  book_id: {
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: true,
-    unique: true,
-  },
-  phone: {
-    type: DataTypes.STRING(20),
-    allowNull: true,
-  },
-  address: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  membership_date: {
+  borrow_date: {
     type: DataTypes.DATEONLY,
     defaultValue: DataTypes.NOW,
   },
+  due_date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false,
+  },
+  return_date: {
+    type: DataTypes.DATEONLY,
+    allowNull: true,
+  },
   status: {
-    type: DataTypes.ENUM('active', 'inactive'),
-    defaultValue: 'active',
+    type: DataTypes.ENUM('borrowed', 'returned', 'overdue'),
+    defaultValue: 'borrowed',
   },
 });
 
-module.exports = Member;
+module.exports = Borrow;

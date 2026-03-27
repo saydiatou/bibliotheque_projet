@@ -1,8 +1,10 @@
 require('dotenv').config();
 const app = require('./app');
-const sequelize = require('./config/database');
+const { sequelize, User } = require('./models');
+
+
 const bcrypt = require('bcryptjs');
-const { User } = require('./models');      
+//const { User } = require('./models');      
 
 const PORT = process.env.PORT || 5000;
 

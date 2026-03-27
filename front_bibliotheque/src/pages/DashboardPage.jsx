@@ -20,15 +20,22 @@ function StatCard({ title, value, icon, color }) {
 export default function DashboardPage() {
   const [stats, setStats] = useState({ books: null, members: null, borrows: null });
 
-  useEffect(() => {
-    Promise.all([
-      api.get('/stats/books'),
-      api.get('/stats/members'),
-      api.get('/stats/borrows'),
-    ]).then(([b, m, br]) => {
-      setStats({ books: b.data, members: m.data, borrows: br.data });
-    }).catch(console.error);
-  }, []);
+ useEffect(() => {
+  Promise.allSettled([
+    api.get('/stats/books'),
+    api.get('/stats/members'),
+    api.get('/stats/borrows'),
+  ]).then((results) => {
+    console.log('Résultats stats :', results);
+
+    setStats({
+      books: results[0].status === 'fulfilled' ? results[0].value.data : {},
+      members: results[1].status === 'fulfilled' ? results[1].value.data : {},
+      borrows: results[2].status === 'fulfilled' ? results[2].value.data : {},
+    });
+  });
+}, []);
+
 
   return (
     <div>
