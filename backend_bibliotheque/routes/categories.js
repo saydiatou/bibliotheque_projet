@@ -1,12 +1,12 @@
-const express = require('express');
-const router  = express.Router();
-const auth    = require('../middlewares/auth');
-const ctrl    = require('../controllers/categoriesController');
+const express = require('express'); // Importe Express
+const router  = express.Router(); // Crée un routeur
+const auth    = require('../middlewares/auth'); // Middleware d'auth
+const ctrl    = require('../controllers/categoriesController'); // Contrôleur des catégories
 
-router.use(auth);
-router.get('/',       ctrl.getAll);
-router.post('/',      ctrl.create);
-router.put('/:id',    ctrl.update);
-router.delete('/:id', ctrl.remove);
+router.use(auth); // Applique auth à toutes les routes
+router.get('/',       ctrl.getAll); // GET /categories : liste
+router.post('/',      ctrl.create); // POST /categories : créer
+router.put('/:id',    ctrl.update); // PUT /categories/:id : mettre à jour
+router.delete('/:id', ctrl.remove); // DELETE /categories/:id : supprimer
 
-module.exports = router;
+module.exports = router; // Exporte le routeur

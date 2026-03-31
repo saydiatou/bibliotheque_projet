@@ -1,41 +1,41 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require('sequelize'); // Importe DataTypes
+const sequelize = require('../config/database'); // Importe Sequelize
 
-const Member = sequelize.define('Member', {
-  id: {
+const Member = sequelize.define('Member', { // Définit le modèle Member
+  id: { // ID
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  first_name: {
+  first_name: { // Prénom
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false, // Obligatoire
   },
-  last_name: {
+  last_name: { // Nom de famille
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false, // Obligatoire
   },
-  email: {
+  email: { // Email
     type: DataTypes.STRING,
-    allowNull: true,
-    unique: true,
+    allowNull: true, // Optionnel
+    unique: true, // Unique
   },
-  phone: {
-    type: DataTypes.STRING(20),
-    allowNull: true,
-  },
-  address: {
-    type: DataTypes.TEXT,
+  phone: { // Téléphone
+    type: DataTypes.STRING(20), // Max 20 chars
     allowNull: true,
   },
-  membership_date: {
-    type: DataTypes.DATEONLY,
-    defaultValue: DataTypes.NOW,
+  address: { // Adresse
+    type: DataTypes.TEXT, // Texte long
+    allowNull: true,
   },
-  status: {
-    type: DataTypes.ENUM('active', 'inactive'),
-    defaultValue: 'active',
+  membership_date: { // Date d'adhésion
+    type: DataTypes.DATEONLY, // Date sans heure
+    defaultValue: DataTypes.NOW, // Défaut : maintenant
+  },
+  status: { // Statut
+    type: DataTypes.ENUM('active', 'inactive'), // Enum avec valeurs
+    defaultValue: 'active', // Défaut : active
   },
 });
 
-module.exports = Member;
+module.exports = Member; // Exporte le modèle

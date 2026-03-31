@@ -1,25 +1,25 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { DataTypes } = require('sequelize'); // Importe DataTypes
+const sequelize = require('../config/database'); // Importe Sequelize
 
-const User = sequelize.define('User', {
-  id: {
+const User = sequelize.define('User', { // Définit le modèle User (utilisateur admin)
+  id: { // ID
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
-  name: {
+  name: { // Nom
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false, // Obligatoire
   },
-  email: {
+  email: { // Email
     type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
+    allowNull: false, // Obligatoire
+    unique: true, // Unique
   },
-  password: {
+  password: { // Mot de passe haché
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false, // Obligatoire
   },
 });
 
-module.exports = User;
+module.exports = User; // Exporte le modèle
